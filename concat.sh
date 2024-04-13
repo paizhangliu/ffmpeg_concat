@@ -19,3 +19,10 @@ for f in ""$source""*.mp4""; do
 done
 ffmpeg -f concat -safe 0 -i ""$source"videos.txt" -c copy ""$source"output.mp4"
 rm ""$source"videos.txt"
+read -p "Do you want to delete source video files? [y/N] " -r resp
+if [[ "$resp" =~ [Yy] ]]; then
+    for f in ""$source""*.mp4""; do
+        if [[ "$f" == ""$source"output.mp4" ]]; then continue; fi
+        rm $f
+    done
+fi
