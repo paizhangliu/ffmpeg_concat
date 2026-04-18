@@ -11,10 +11,22 @@ You can simply drag the folder into terminal to acquire the path you need.
 
 You can also run the script without supplying any argument. In this case, the script will concat videos from the current folder.
 
-**Warning:**
+The script safely handles paths with whitespace and skips an existing `output.mp4` so repeated runs do not accidentally re-concat the previous result.
 
-Path that contains whitespace or other funky characters will NOT WORK and might damage your data.
+Input files are processed in natural sort order. This works well for sequential names such as:
 
-A workaround is to move this script inside the folder and run it without any argument.
+```text
+clip1.mp4
+clip2.mp4
+clip10.mp4
+```
 
-*I accidentally permanently deleted a precious video file when writing this script.*
+It also correctly handles timestamp-style dashcam names such as:
+
+```text
+20260413105139_0001.mp4
+20260413105139_0002.mp4
+20260413105140_0001.mp4
+```
+
+so files are concatenated in the expected chronological order. When multiple files share the same timestamp prefix, they are further ordered by the numeric suffix after the underscore.
